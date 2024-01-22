@@ -52,6 +52,13 @@ class User extends Model {
       });
     }
   }
+
+  getPublicInfo() {
+    const values = { ...this.dataValues };
+    delete values.password;
+    delete values.token;
+    return values;
+  }
 }
 
 class UserData extends User {

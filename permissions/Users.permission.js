@@ -1,3 +1,4 @@
+const UserController = require("../controllers/Users.controller");
 const Permission = require("../lib/Permission");
 const verifyToken = null;
 
@@ -11,33 +12,25 @@ module.exports = new Permission({
       url: "GET /",
       code: "API.USER.LIST",
       name: "Danh sách User",
-      handler: async (req, res, next) => {
-        next({ msg: "OK" });
-      },
+      handler: UserController.list,
     },
     {
       url: "POST /",
       code: "API.USER.CREATE",
       name: "Tạo mới User",
-      handler: async (req, res, next) => {
-        next({ msg: "OK" });
-      },
+      handler: UserController.create,
     },
     {
       url: "GET /:idUser",
       code: "API.USER.DETAIL",
       name: "Chi tiết User",
-      handler: async (req, res, next) => {
-        next({ msg: "OK" });
-      },
+      handler: UserController.detail,
     },
     {
-      url: "UPDATE /:idUser",
+      url: "PUT /:idUser",
       code: "API.USER.DETAIL",
       name: "Chỉnh sửa User",
-      handler: async (req, res, next) => {
-        next({ msg: "OK" });
-      },
+      handler: UserController.update,
     },
   ],
 });
