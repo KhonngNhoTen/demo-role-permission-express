@@ -11,7 +11,7 @@ class Project extends Model {
     INACTIVE: -1,
   };
   /** @param {import ("sequelize").Sequelize} connection */
-  init(connection, data) {
+  static inits(connection, data) {
     Project.init(
       {
         id: {
@@ -22,6 +22,7 @@ class Project extends Model {
         name: {
           type: DataTypes.STRING,
         },
+
         status: {
           type: DataTypes.INTEGER,
         },
@@ -31,10 +32,22 @@ class Project extends Model {
         sequelize: connection,
       }
     );
+    return Project;
   }
 
   /** @param {Object.<string, typeof Model>} param */
-  relationship({ User, Task }) {}
+  static relationship({ User, Task, Project }) {
+    if (Task) Project.hasMany(Task, { foreignKey: "idProject", as: "tasks" });
+    if (User)
+      Project.belongsToMany(User, {
+        through: {
+          model: Task,
+        },
+        foreignKey: "idProject",
+        otherKey: "assignee",
+        as: "users",
+      });
+  }
 }
 
 class ProjectData extends Project {

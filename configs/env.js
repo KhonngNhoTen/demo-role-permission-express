@@ -3,6 +3,7 @@ dotenv.config();
 const env = {
   SERVER: {
     PORT: getInt("SERVER_PORT"),
+    SERECT_KEY: getString("SERECT_KEY", "123456aA@"),
   },
   DATABASE: {
     HOST: getString("DB_HOST", "localhost"),

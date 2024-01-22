@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 
 class User extends Model {
   /** @param {import ("sequelize").Sequelize} connection */
-  init(connection, data) {
+  static inits(connection, data) {
     User.init(
       {
         id: {
@@ -19,16 +19,39 @@ class User extends Model {
         age: {
           type: DataTypes.INTEGER,
         },
+        idTeam: {
+          type: DataTypes.INTEGER,
+        },
+        token: DataTypes.STRING,
       },
       {
         tableName: "Users",
         sequelize: connection,
       }
     );
+
+    return User;
   }
 
   /** @param {Object.<string, typeof Model>} param */
-  relationship({}) {}
+  static relationship({ User, Team, Project, Task }) {
+    if (Team) {
+      User.belongsTo(Team, { foreignKey: "idTeam", as: "team" });
+    }
+    if (Task) {
+      User.hasMany(Project, { foreignKey: "assignee", as: "tasks" });
+    }
+    if (Project) {
+      User.belongsToMany(Project, {
+        through: {
+          model: Task,
+        },
+        foreignKey: "assignee",
+        otherKey: "idProject",
+        as: "projects",
+      });
+    }
+  }
 }
 
 class UserData extends User {

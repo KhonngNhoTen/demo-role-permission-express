@@ -1,16 +1,15 @@
+const AuthController = require("../controllers/Auth.controller");
 const Permission = require("../lib/Permission");
+const VerifyTokenMiddleware = require("../middlewares/VerifyToken.middleware");
 
 module.exports = new Permission([
   {
-    url: "/login",
-    handler: async (req, res, next) => {
-      next({ msg: "login" });
-    },
+    url: "POST /login",
+    handler: AuthController.login,
   },
   {
-    url: "/logout",
-    handler: async (req, res, next) => {
-      next({ msg: "logout" });
-    },
+    url: "POST /logout",
+    handler: AuthController.logout,
+    middlewares: [VerifyTokenMiddleware],
   },
 ]);
