@@ -53,12 +53,6 @@ class Project extends Model {
 class ProjectData extends Project {
   id = 0;
   name = "";
-
-  /** Mật khẩu */
-  password = "";
-
-  /** Tuổi người dùng */
-  age = 0;
 }
 
 module.exports = ProjectData;

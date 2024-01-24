@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Team extends Model {
+class Role extends Model {
   /** @param {import ("sequelize").Sequelize} connection */
   static inits(connection, data) {
-    Team.init(
+    Role.init(
       {
         id: {
           type: DataTypes.INTEGER,
@@ -15,26 +15,23 @@ class Team extends Model {
         },
       },
       {
-        tableName: "Teams",
+        tableName: "Roles",
         sequelize: connection,
       }
     );
-    return Team;
+    return Role;
   }
 
   /** @param {Object.<string, typeof Model>} param */
-  static relationship({ Team, User }) {
-    if (User)
-      Team.hasMany(User, {
-        as: "users",
-        foreignKey: "idTeam",
-      });
+  static relationship({ User, Role, Permission }) {
+    if (User) Role.hasMany(User, { foreignKey: "idRole", as: "user" });
+    if (Permission) Role.belongsToMany(Permission);
   }
 }
 
-class TeamData extends Team {
+class RoleData extends Role {
   id = 0;
   name = "";
 }
 
-module.exports = TeamData;
+module.exports = RoleData;

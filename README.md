@@ -28,6 +28,11 @@ List api:
 
 ---------------
 
+Permissions:
+
+
+--------------
+
 Role:
 User:
   - Auth

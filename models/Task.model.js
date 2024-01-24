@@ -40,13 +40,10 @@ class Task extends Model {
 
 class TaskData extends Task {
   id = 0;
-  name = "";
-
-  /** Mật khẩu */
-  password = "";
-
-  /** Tuổi người dùng */
-  age = 0;
+  title = "";
+  description = "";
+  assignee = 0;
+  idProject = 0;
 }
 
 module.exports = TaskData;

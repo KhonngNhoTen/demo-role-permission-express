@@ -22,6 +22,7 @@ class User extends Model {
         idTeam: {
           type: DataTypes.INTEGER,
         },
+        idRole: { type: DataTypes.INTEGER },
         token: DataTypes.STRING,
       },
       {
@@ -70,6 +71,7 @@ class UserData extends User {
 
   /** Tuổi người dùng */
   age = 0;
+  idRole = 0;
 }
 
 module.exports = UserData;
