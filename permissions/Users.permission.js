@@ -10,27 +10,35 @@ module.exports = new Permission({
   apis: [
     {
       url: "GET /",
-      code: "API.USER.LIST",
+      code: "USER.LIST",
       name: "Danh sách User",
       handler: UserController.list,
     },
     {
       url: "POST /",
-      code: "API.USER.CREATE",
+      code: "USER.CREATE",
       name: "Tạo mới User",
       handler: UserController.create,
     },
     {
       url: "GET /:idUser",
-      code: "API.USER.DETAIL",
+      code: "USER.DETAIL",
       name: "Chi tiết User",
       handler: UserController.detail,
     },
     {
       url: "PUT /:idUser",
-      code: "API.USER.DETAIL",
+      code: "USER.UPDATE",
       name: "Chỉnh sửa User",
       handler: UserController.update,
+    },
+    {
+      url: "GET /:idUser/tasks",
+      code: "USER.TASKS.LIST",
+      name: "Chỉnh sửa User",
+      handler: async (req, res, next) => {
+        next({ message: "List tasks of member" });
+      },
     },
   ],
 });

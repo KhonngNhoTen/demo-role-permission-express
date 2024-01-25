@@ -1,5 +1,6 @@
 const md5 = require("md5");
-const { Project, Task, User, Team } = require("../models");
+const { models } = require("../models");
+const { Project, Task, User } = models;
 
 const fakeDatabase = {
   Team: [
@@ -12,16 +13,32 @@ const fakeDatabase = {
   ],
   User: [
     {
-      name: "User 1",
+      name: "User",
       password: md5("123456aA@"),
       age: 18,
       idTeam: 1,
+      roleCode: "User",
     },
     {
-      name: "User 2",
+      name: "Leader",
       password: md5("123456aA@"),
       age: 18,
       idTeam: 1,
+      roleCode: "Leader",
+    },
+    {
+      name: "Peroject manager",
+      password: md5("123456aA@"),
+      age: 18,
+      idTeam: 1,
+      roleCode: "Project_manager",
+    },
+    {
+      name: "Admin",
+      password: md5("123456aA@"),
+      age: 18,
+      idTeam: 1,
+      roleCode: "Admin",
     },
   ],
   Project: [
@@ -49,11 +66,10 @@ const fakeDatabase = {
 
 async function main() {
   try {
-    await Team.bulkCreate(fakeDatabase.Team);
     await User.bulkCreate(fakeDatabase.User);
     await Project.bulkCreate(fakeDatabase.Project);
     await Task.bulkCreate(fakeDatabase.Task);
-    console.log("Fake database");
+    console.log("Fake database successfully!!");
     process.exit(1);
   } catch (error) {
     console.error(error);

@@ -13,6 +13,10 @@ class Role extends Model {
         name: {
           type: DataTypes.STRING,
         },
+        code: {
+          type: DataTypes.STRING,
+          unique: true,
+        },
       },
       {
         tableName: "Roles",
@@ -24,8 +28,8 @@ class Role extends Model {
 
   /** @param {Object.<string, typeof Model>} param */
   static relationship({ User, Role, Permission }) {
-    if (User) Role.hasMany(User, { foreignKey: "idRole", as: "user" });
-    if (Permission) Role.belongsToMany(Permission);
+    if (User) Role.hasMany(User, { foreignKey: "roleCode", as: "user" });
+    if (Permission) Role.belongsToMany(Permission, { through: "RolePermission", sourceKey: "code" });
   }
 }
 

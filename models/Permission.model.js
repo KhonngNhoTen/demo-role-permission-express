@@ -43,7 +43,7 @@ class Permission extends Model {
 
   /** @param {Object.<string, typeof Model>} param */
   static relationship({ Role, Permission }) {
-    if (Role) Permission.belongsToMany(Role);
+    if (Role) Permission.belongsToMany(Role, { through: "RolePermission", sourceKey: "code" });
   }
 }
 

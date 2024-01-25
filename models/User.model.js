@@ -22,7 +22,7 @@ class User extends Model {
         idTeam: {
           type: DataTypes.INTEGER,
         },
-        idRole: { type: DataTypes.INTEGER },
+        roleCode: { type: DataTypes.STRING },
         token: DataTypes.STRING,
       },
       {
@@ -35,12 +35,15 @@ class User extends Model {
   }
 
   /** @param {Object.<string, typeof Model>} param */
-  static relationship({ User, Team, Project, Task }) {
+  static relationship({ User, Team, Project, Task, Role }) {
     if (Team) {
       User.belongsTo(Team, { foreignKey: "idTeam", as: "team" });
     }
     if (Task) {
       User.hasMany(Project, { foreignKey: "assignee", as: "tasks" });
+    }
+    if (Role) {
+      User.belongsTo(Role, { foreignKey: "roleCode", as: "role", targetKey: "code" });
     }
     if (Project) {
       User.belongsToMany(Project, {

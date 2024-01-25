@@ -4,6 +4,8 @@ const models = {
   Project: require("./Project.model"),
   User: require("./User.model"),
   Task: require("./Task.model"),
+  Role: require("./Role.model"),
+  Permission: require("./Permission.model"),
   // Team: require("./Team.model"),
 };
 // Load model
