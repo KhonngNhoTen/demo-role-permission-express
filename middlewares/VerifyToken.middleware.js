@@ -11,6 +11,8 @@ module.exports = async function (req, res, next) {
 
     await checkToken(token);
 
+    await checkPermission(checkPermission);
+
     next();
   } catch (error) {
     if (error.name === "TokenExpiredError")
